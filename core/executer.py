@@ -1,4 +1,5 @@
 
+import subprocess
 
 class Executer:
     def __init__(self, exetype:str = None, cmd:str = None):
@@ -7,8 +8,37 @@ class Executer:
     
     def do(self, arg:str = None):
         if self.type == 'reply':
-            print(f'doing {self.cmd}')
             return self.cmd
         if self.type == 'command':
-            print(f'doing {self.cmd}')
-            return self.cmd
+            try:
+                cmd = [self.cmd]
+                if arg is not None:
+                    cmd.append(arg) 
+                result = subprocess.run(cmd, stdout = subprocess.PIPE)
+                return result.stdout.decode()
+            except Exception as e:
+                print(e)
+                return None
+
+def __test():
+    import time
+    import os
+
+    exe1 = Executer('reply','hello')
+    exe2 = Executer('command','date')
+    # exe2 = Executer('command','./test.sh')
+    """
+    you can execute shell with 'shebang':
+
+    #! /bin/sh
+    ...
+    ...
+
+    """
+    
+    print(exe1.do())
+    print(exe2.do())
+
+if __name__ == '__main__':
+    __test()
+

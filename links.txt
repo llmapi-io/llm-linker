@@ -1,0 +1,2 @@
+{"task":"tell a joke","action":{"type":"reply","contents":["Pig can fly with ears"]}}
+{"task":"clock time right now","action":{"type":"command","contents":["./some.sh"]}}

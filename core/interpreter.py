@@ -12,8 +12,10 @@ class Interpreter:
         return executer objects as worker
         """
         index = self.embed.embedding(link['task'])
+        if index is None:
+            return None,None
         exetype = link['action']['type']
-        cmds = link['action']['commands']
+        cmds = link['action']['contents']
         workers = []
         for cmd in cmds:
             executer = Executer(exetype,cmd)
