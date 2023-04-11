@@ -3,10 +3,20 @@ llm-linker hope to connect natural language requests with relevant structured ac
 
 ```mermaid
 graph LR
-task_prompt-->|embedding| index_map --> action.->commands.-> ...
+task_prompt-->|embedding| index_map --> action.->commands.-> image_gen
+commands.-> cv_task
+commands.-> program
+commands.-> ...
 query_prompt-->|embedding| index_map 
 action.->reply
+action.->regen .-> more_context
 ```
+
+### TODOs
+
+- [ ] support `requests` type, for directly link to OpenAPIs.
+- [ ] support linkDB, to store links locally.
+- [ ] combine with `Decision Tree` ?
 
 ## :point_right: Try it
 
@@ -42,7 +52,7 @@ The `type` in `action` should be `reply` `command` or `regen`:
  - `command`: you can run a set of scripts or local programs when `task` was matched.
  - `regen`: you can re-ask LLM (such as chatgpt) based on task input to get new responses when `task` was matched.
 
-### some linker demo
+### some linker demos
 
 1. Using `reply` type
 ```json
@@ -123,6 +133,7 @@ link.act('what is your name?')
 # Done!
 ```
 
+### :star2: If you like this project, please follow us and star it, let's play together! :heart:
 
 
 
