@@ -51,6 +51,7 @@ The `type` in `action` should be `reply` `command` or `regen`:
 }
 ```
 > user's input: what's your name?
+> 
 > linker's output: I'm llm-linker!
 
 2. Using `command` type
@@ -68,6 +69,7 @@ date +"%Y-%m-%d %H:%M:%S"
 ```
 
 > user's input: what's the time?
+> 
 > linker's output: 2023-04-11 11:22:33
 
 2. Using `regen` type
@@ -79,6 +81,7 @@ date +"%Y-%m-%d %H:%M:%S"
 ```
 
 > user's input: 1+1=?
+> 
 > linker's output(use `chatgpt`):
 ```
 Sure, I'd be happy to help you calculate step by step!
@@ -89,7 +92,7 @@ Explanation:
 3. The answer is 2. 
 ```
 
-## Interface description
+## :scroll: Interface description
 
 > Very simple, only TWO api
 
@@ -97,7 +100,7 @@ The only thing you need to use is the `Linker` class.
 
 Interface in `Linker`:
 
-### add(link:dict)
+### 1. add (link:dict)
 
 use this interface to dynamic add linkers:
 
@@ -108,7 +111,7 @@ link.add({"task" : "tell your name", "action" : { "type" : "reply", "contents" :
 # Done!
 ```
 
-### act(prompt:str, match_thresh:float = 0.7)
+### 2. act (prompt:str, match_thresh:float = 0.7)
 
 use this interface to match `task` and execute actions for user's query:
 
