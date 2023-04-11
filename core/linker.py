@@ -2,7 +2,7 @@ from core.interpreter import Interpreter
 import numpy as np
 import os
 
-def distance(embedding1: dict, embedding2: dict) -> float:
+def _distance(embedding1: dict, embedding2: dict) -> float:
     a = embedding1
     b = embedding2
     dot_product = np.dot(a, b)
@@ -23,6 +23,7 @@ class Linker:
         link:
         {'task':'your task describe','action':{'type':'reply','contents':['custom reply']}}
         {'task':'your task describe','action':{'type':'command','contents':['some_scripts.sh']}}
+        {'task':'your task describe','action':{'type':'regen','contents':['some prompt prefix:']}}
         """
         idx,wrks = self.inter.decode(link)
         self.links.append([idx,wrks])
@@ -32,7 +33,7 @@ class Linker:
         top_score = 0
         top_link = None
         for link in self.links:
-            dis = distance(index,link[0]) 
+            dis = _distance(index,link[0]) 
             if dis > top_score and dis >= match_thresh:
                 top_score = dis
                 top_link = link[1]

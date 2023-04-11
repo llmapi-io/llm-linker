@@ -1,14 +1,20 @@
 
 import subprocess
+from core.prompt import Prompt
 
 class Executer:
     def __init__(self, exetype:str = None, cmd:str = None):
         self.type = exetype
         self.cmd = cmd
+        if self.type == 'regen':
+            self.llm = Prompt()
     
     def do(self, arg:str = None):
         if self.type == 'reply':
             return self.cmd
+        if self.type == 'regen':
+            rep = self.llm.ask(self.cmd + arg)
+            return rep
         if self.type == 'command':
             try:
                 cmd = [self.cmd]
