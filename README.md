@@ -3,7 +3,7 @@ llm-linker hope to connect natural language requests with relevant structured ac
 
 ```mermaid
 graph LR
-task_prompt-->|embedding| index_map --> actions.->commands.-> image_gen
+task_prompt-->|embedding| index_map --> actions.->command.-> image_gen
 command.-> cv_task
 command.-> program
 command.-> ...
@@ -32,7 +32,7 @@ python3 run.py --apikey=your_api_key --links=links.txt --query='what is the time
 
 result:
 
-[demo](demo/html.png)
+![demo](demo/html.png)
 
 ## :art: Linker schema
 During runtime，user input query prompt, prompt encoded as `embedding`，then match with linker's `task`，finally you can do anything through actions with simple language prompt.
