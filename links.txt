@@ -1,2 +1,3 @@
-{"task":"tell a joke","action":{"type":"reply","contents":["Pig can fly with ears"]}}
-{"task":"clock time right now","action":{"type":"command","contents":["./some.sh"]}}
+{"task":"tell a joke","actions":[{"type":"reply","content":"Pig can fly with ears","input":"_NONE_"}]}
+{"task":"creat login webpage","actions":[{"type":"regen","content":"write a login html and can send requests to server using ajax","input":"_NONE_"}]}
+{"task":"clock time right now","actions":[{"type":"command","content":"./some.sh","input":"_NONE_"}]}

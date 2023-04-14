@@ -21,15 +21,18 @@ class Linker:
     def add(self, link:dict):
         """
         link:
-        {'task':'your task describe','action':{'type':'reply','contents':['custom reply']}}
-        {'task':'your task describe','action':{'type':'command','contents':['some_scripts.sh']}}
-        {'task':'your task describe','action':{'type':'regen','contents':['some prompt prefix:']}}
+        {'task':'your task describe','actions':[{'type':'reply','content':'custom reply',"input":"_NONE_"}]}
+        {'task':'your task describe','actions':[{'type':'command','content':'some_scripts.sh',"input":"_PROMPT_"},{'type':'command','content':'some_scripts2.sh',"input":"_OUTPUT_"}]}
+        {'task':'your task describe','actions':[{'type':'regen','content':'some custom prompt',"input":"_NONE_"}]}
         """
         idx,wrks = self.inter.decode(link)
         self.links.append([idx,wrks])
 
     def act(self, prompt:str, match_thresh:float = 0.7):
         index = self.inter.embed.embedding(prompt)
+        if index is None:
+            print("Failed to get prompt embedding,try again")
+            return None
         top_score = 0
         top_link = None
         for link in self.links:
@@ -48,14 +51,12 @@ class Linker:
 
         return rep
 
-
-
 def __test():
     import time
     linker = Linker()
     time.sleep(1)
-    link1 = {'task':'tell a joke','action':{'type':'reply','contents':['Pig can fly with ears']}}
-    link2 = {'task':'clock time right now','action':{'type':'command','contents':['date']}}
+    link1 = {'task':'tell a joke','actions':[{'type':'reply','content':'Pig can fly with ears','input':'_NONE_'}]}
+    link2 = {'task':'clock time right now','actions':[{'type':'command','content':'date','input':'_NONE_'}]}
 
     linker.add(link1)
     time.sleep(1)

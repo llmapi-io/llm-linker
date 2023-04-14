@@ -20,7 +20,8 @@ if __name__ == '__main__':
         lines = f.readlines()
         for line in lines:
             linker.add(json.loads(line))
-            time.sleep(0.5)
+            time.sleep(1)
 
+    time.sleep(1) # limit rate of llmapi
     rep = linker.act(arg.query)
     print(rep)

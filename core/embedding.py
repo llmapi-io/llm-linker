@@ -14,4 +14,7 @@ class Embedding:
 
     def embedding(self, prompt:str):
         ret,rep = self.client.ask(prompt=prompt)
-        return rep if ret == 0 else None
+        if ret != 0:
+            print(ret,rep)
+            return None
+        return rep

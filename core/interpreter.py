@@ -14,11 +14,13 @@ class Interpreter:
         index = self.embed.embedding(link['task'])
         if index is None:
             return None,None
-        exetype = link['action']['type']
-        cmds = link['action']['contents']
+        
         workers = []
-        for cmd in cmds:
-            executer = Executer(exetype,cmd)
+        for act in link['actions']:
+            exetype = act['type']
+            cmd = act['content']
+            use_input = True if act['input'] != '_NONE_' else False
+            executer = Executer(exetype,cmd, use_input)
             workers.append(executer)
 
         return index,workers
